@@ -2,12 +2,13 @@
 const Express = require("express");
 const axios = require("axios");
 
+const dotenv = require("dotenv").config();
+
 const app = Express();
 
 const port: number = 3333;
-
-const clientId: string = "8344bb54da3857d95795";
-const clientSecret: string = "bf33116f635771887586d1aacdbf6359d7f1a415";
+const clientId: string | undefined = process.env.CLIENT_ID;
+const clientSecret: string | undefined = process.env.CLIENT_SECRET;
 
 app.get("/", (req: any, res: any) => {
   res.status(200).json({
@@ -37,7 +38,7 @@ app.get("/cb", async (req: any, res: any) => {
       "https://github.com/login/oauth/access_token",
       payload
     );
-    res.redirect("http://localhost:3000/cb?" + data.data);
+    res.redirect("http://localhost:4000/cb?" + data.data);
   } catch (e: any) {
     res.status(401).json({ status: "error", message: e.toString() });
   }
