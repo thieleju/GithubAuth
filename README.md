@@ -1,6 +1,11 @@
 # Vue 3 + Typescript + Vite
 
-This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## You need to create a `.env` file in the project root
+Fill the .env with you information from your GitHub OAuth2 App (mandatory)
+```env
+CLIENT_ID=somethingsomething
+CLIENT_SECRET=somethingsecret
+```
 
 ## Recommended IDE Setup
 
