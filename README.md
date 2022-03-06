@@ -1,6 +1,8 @@
 # Vue 3 + Typescript + Vite and express api
 
-## Folder api needs a `.env` file
+## Requirements
+
+ - Folder `/api/` needs a `.env` file
 
 ## Recommended IDE Setup
 
