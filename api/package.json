@@ -4,22 +4,30 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "nodemon --watch index.ts --exec npm run dev:start",
-    "dev:start": "npm-run-all clean lint tsc start",
     "clean": "rimraf dist/*",
     "lint": "tslint -c tslint.json -p tsconfig.json --fix",
     "tsc": "tsc",
-    "start": "node ."
+    "start": "node .",
+    "dev": "cross-env NODE_ENV=development nodemon --watch index.ts --exec npm run dev:start",
+    "dev:start": "npm-run-all clean lint tsc start",
+    "prod": "cross-env NODE_ENV=production npm run prod:start",
+    "prod:start": "npm-run-all clean lint tsc pm2",
+    "pm2": "pm2 start dist/index.js --watch"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "axios": "^0.26.0",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.0.0",
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "helmet": "^5.0.2",
+    "pm2": "^5.2.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.12",
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.13",
     "@types/fs-extra": "^9.0.13",

@@ -1,8 +1,31 @@
 # Vue 3 + Typescript + Vite and express api
 
-## Requirements
+## How to use
 
- - Folder `/api/` needs a `.env` file
+- Run `npm i` in `/api/` and `/frontend/` to install dependencies
+
+- In `/api/` add `.env.development` and `.env.production` files
+
+Example for .env.development
+
+ ```env
+SERVER_PORT=3333
+CORS_ORIGIN=http://localhost:3000
+CLIENT_ID=
+CLIENT_SECRET=
+ ```
+
+- In `/frontend/` add `.env.development` and `.env.production` files
+
+Example for .env.development
+
+```env
+VITE_API_BASE_URL=http://localhost:3333
+ ```
+
+- Use `npm run dev` or `npm run prod` to start the API
+
+- Use `npm run dev` to start the frontend
 
 ## Recommended IDE Setup
 

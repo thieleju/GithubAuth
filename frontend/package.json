@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "serve": "vite preview",
-    "build": "vite build",
-    "dev": "vite",
-    "preview": "vite preview"
+    "serve": "vite preview --mode development",
+    "build": "vite build --mode production",
+    "dev": "vite --mode development",
+    "preview": "vite preview --mode development"
   },
   "dependencies": {
     "@mdi/font": "5.9.55",
