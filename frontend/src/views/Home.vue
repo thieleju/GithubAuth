@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Hello you are at Home</h1>
+    <h1>Hello you are at Home!</h1>
     <v-btn @click="fetchData">Fetch Data</v-btn>
 
     <v-card>
