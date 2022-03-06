@@ -16,10 +16,12 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+// import { ref } from "vue";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
+
+console.log(route.query);
 </script>
 
 <style></style>
