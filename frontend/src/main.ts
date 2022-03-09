@@ -7,7 +7,4 @@ import router from "./router";
 
 loadFonts();
 
-createApp(App)
-  .use(vuetify)
-  .use(router)
-  .mount("#app");
+createApp(App).use(vuetify).use(router).mount("#app");
