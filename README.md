@@ -11,8 +11,10 @@ Example for .env.development
  ```env
 SERVER_PORT=3333
 CORS_ORIGIN=http://localhost:3000
-CLIENT_ID=
-CLIENT_SECRET=
+CLIENT_ID=xyz
+CLIENT_SECRET=xyz
+TOKEN_EXPIRE=1d
+JWT_SECRET=xyz
  ```
 
 - In `/frontend/` add `.env.development` and `.env.production` files
