@@ -15,10 +15,7 @@
 
 <script lang="ts" setup>
 import axios from "../plugins/axios";
-// import { useRouter } from "vue-router";
 import { ref } from "vue";
-
-// const router = useRouter();
 
 let url: string = String(import.meta.env.VITE_API_BASE_URL);
 

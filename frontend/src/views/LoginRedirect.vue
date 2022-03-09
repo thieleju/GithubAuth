@@ -16,15 +16,17 @@
 </template>
 
 <script lang="ts" setup>
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import axios from "../plugins/axios";
 
 const route = useRoute();
+const router = useRouter();
 
 let url: string = String(import.meta.env.VITE_API_BASE_URL) + "/auth/token";
 
 axios.post(url, { access_token: route.query.access_token }).then((res) => {
   localStorage.setItem("jwt.token", res.data.token);
+  router.push({ name: "home" });
 });
 </script>
 
