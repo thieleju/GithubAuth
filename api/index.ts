@@ -1,5 +1,4 @@
 import express from "express";
-import axios from "axios";
 import dotenv from "dotenv";
 import cors from "cors";
 import helmet from "helmet";
@@ -42,13 +41,15 @@ app.use((err: any, req: any, res: any, next: any) => {
 app.get("/", (req, res) => {
   res.status(200).json({
     success: true,
-    message: "Hello " + req.ip + "!",
+    message: "API Online!",
   });
 });
 
 // import routes
 import authRouter from "./routes/auth";
+import usersRouter from "./routes/users";
 app.use("/auth", authRouter);
+app.use("/users", usersRouter);
 
 // Create server object
 const server = app.listen(port, () => {

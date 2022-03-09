@@ -17,7 +17,6 @@ router.get("/", async (req, res) => {
         code: req.query.code,
       }
     );
-
     // redirect to callback component with access token in query
     res.redirect("http://localhost:3000/cb?" + data.data);
   } catch (e) {

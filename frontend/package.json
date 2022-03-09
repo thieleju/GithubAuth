@@ -19,9 +19,12 @@
     "webfontloader": "^1.0.0"
   },
   "devDependencies": {
+    "@types/node": "^17.0.21",
     "@types/webfontloader": "^1.0.0",
     "@vitejs/plugin-vue": "^2.2.0",
     "@vuetify/vite-plugin": "^1.0.0-alpha.0",
+    "i": "^0.3.7",
+    "npm": "^8.5.3",
     "sass": "^1.38.0",
     "sass-loader": "^10.0.0",
     "ts-node": "^10.6.0",
