@@ -1,15 +1,20 @@
 import express from "express";
 const router = express.Router();
 
+import axios from "axios";
+
 import { verifyToken } from "../../scripts/authentication";
 
-const tokenExpire: string = process.env.TOKEN_EXPIRE;
+router.post("/", verifyToken, async (req: any, res: any) => {
+  const user = await axios.get("https://api.github.com/user", {
+    headers: {
+      Authorization: "Bearer " + req.body.access_token,
+    }
+  });
 
-router.get("/", verifyToken, (req: any, res: any) => {
-  // send token
   res.status(200).json({
     status: "success",
-    decoded: req.decoded,
+    user: user.data
   });
 });
 
