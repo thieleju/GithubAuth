@@ -51,5 +51,8 @@ export const useMainStore = defineStore("mainStore", {
     getUser(): GitHubUser | null {
       return this.user;
     },
+    isUserAuthenticated(): boolean {
+      return this.isAuthenticated;
+    }
   }
 });

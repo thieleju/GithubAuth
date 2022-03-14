@@ -3,7 +3,7 @@
     <v-navigation-drawer color="grey-darken-2" permanent>
       <router-link
         v-for="item in apps"
-        :to="item.name"
+        :to="{ name: item.name }"
         :key="item.name"
         class=""
       >
@@ -42,6 +42,11 @@ interface AppItem {
 }
 
 const apps: AppItem[] = [
+  {
+    title: "Start",
+    name: "start",
+    icon: "mdi-home",
+  },
   {
     title: "Home",
     name: "home",
