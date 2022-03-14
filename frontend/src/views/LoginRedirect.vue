@@ -1,32 +1,47 @@
 <template>
-  <div>
-    <h1>Hello you are at Login Redirect</h1>
-    <br />
-    <div v-if="route.query.access_token">
-      <p>access_token: {{ route.query.access_token }}</p>
-      <p>scope: {{ route.query.scope }}</p>
-      <p>token_type: {{ route.query.token_type }}</p>
-    </div>
-    <div v-else>
-      <p>error: {{ route.query.error }}</p>
-      <p>error_description: {{ route.query.error_description }}</p>
-      <p>error_uri: {{ route.query.error_uri }}</p>
-    </div>
-  </div>
+  <v-overlay :model-value="true" class="align-center justify-center">
+    <v-progress-circular indeterminate size="64"></v-progress-circular>
+  </v-overlay>
 </template>
 
 <script lang="ts" setup>
+import { onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import axios from "../plugins/axios";
+import { useMainStore } from "../store/index";
 
 const route = useRoute();
 const router = useRouter();
+const mainStore = useMainStore();
+const baseUrl: string = String(import.meta.env.VITE_API_BASE_URL);
 
-let url: string = String(import.meta.env.VITE_API_BASE_URL) + "/auth/token";
+onMounted(async () => {
+  try {
+    // get jwt with query token from github
+    const tokenRes = await axios.post(baseUrl + "/auth/token", {
+      access_token: route.query.access_token,
+    });
 
-axios.post(url, { access_token: route.query.access_token }).then((res) => {
-  localStorage.setItem("jwt.token", res.data.token);
-  router.push({ name: "home" });
+    // set jwt data in store
+    mainStore.setJWT(tokenRes.data.tokenJwt);
+    mainStore.setGitHubToken(tokenRes.data.tokenGitHub);
+
+    // get user info with jwt token(auth to middleware) and github token(auth to github)
+    const userRes = await axios.post(baseUrl + "/users/user", {
+      access_token: mainStore.getGitHubToken,
+    });
+
+    // set user data in store
+    mainStore.setUser(userRes.data.user);
+
+    // const user: any = mainStore.getUser();
+    // console.log(user);
+
+    // redirect to home component
+    router.push({ name: "home" });
+  } catch (error) {
+    console.log(error);
+  }
 });
 </script>
 

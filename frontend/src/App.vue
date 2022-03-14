@@ -11,7 +11,7 @@
       </router-link>
       <template v-slot:append>
         <div class="pa-2">
-          <v-btn block> Logout </v-btn>
+          <v-btn block @click="logout" color="primary"> Logout </v-btn>
         </div>
       </template>
     </v-navigation-drawer>
@@ -22,15 +22,19 @@
 
     <v-main>
       <v-container>
-        <v-card height="200px" class="d-flex justify-center align-center">
-          <router-view></router-view>
-        </v-card>
+        <router-view></router-view>
       </v-container>
     </v-main>
   </v-app>
 </template>
 
 <script lang="ts" setup>
+import { useRoute, useRouter } from "vue-router";
+import { useMainStore } from "./store/index";
+
+const router = useRouter();
+const mainStore = useMainStore();
+
 interface AppItem {
   title: string;
   name: string;
@@ -49,4 +53,9 @@ const apps: AppItem[] = [
     icon: "mdi-information",
   },
 ];
+
+function logout() {
+  mainStore.logout();
+  router.push({ name: "start" });
+}
 </script>

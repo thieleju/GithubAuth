@@ -16,13 +16,15 @@ router.post("/", async (req, res) => {
         },
       });
       // sign userdata token
-      const token = jwt.sign(user.data, process.env.JWT_SECRET, {
+      const token = jwt.sign({ login: user.data.login }, process.env.JWT_SECRET, {
         expiresIn: tokenExpire,
       });
+
       // send token
       res.status(200).json({
         status: "success",
-        token,
+        tokenJwt: token,
+        tokenGitHub: req.body.access_token
       });
     } else throw new Error("Invalid authorization header");
   } catch (error) {
