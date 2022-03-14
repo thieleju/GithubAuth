@@ -11,10 +11,10 @@ Example for .env.development
  ```env
 SERVER_PORT=3333
 CORS_ORIGIN=http://localhost:3000
-CLIENT_ID=xyz
-CLIENT_SECRET=xyz
+CLIENT_ID=xyz            // GitHub OAuth client id
+CLIENT_SECRET=xyz        // GitHub OAuth client secret
 TOKEN_EXPIRE=1d
-JWT_SECRET=xyz
+JWT_SECRET=xyz           // random 32 char string
  ```
 
 - In `/frontend/` add `.env.development` and `.env.production` files
