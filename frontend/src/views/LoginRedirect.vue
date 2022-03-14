@@ -34,9 +34,6 @@ onMounted(async () => {
     // set user data in store
     mainStore.setUser(userRes.data.user);
 
-    // const user: any = mainStore.getUser();
-    // console.log(user);
-
     // redirect to home component
     router.push({ name: "home" });
   } catch (error) {

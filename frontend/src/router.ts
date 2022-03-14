@@ -38,7 +38,7 @@ router.beforeEach((to, from, next) => {
   const authUserStore = useMainStore()
 
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (authUserStore.isAuthenticated) next()
+    if (authUserStore.isUserAuthenticated) next()
     else next({ name: "start" })
   } else next()
 })
