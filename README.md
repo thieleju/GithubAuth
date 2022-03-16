@@ -9,12 +9,12 @@
 Example for .env.development
 
  ```env
-SERVER_PORT=3333                     // Express Server Port
+SERVER_PORT=3333                     // Express server port
 CORS_ORIGIN=http://localhost:3000    // Only allow requests from this origin
 CLIENT_ID=xyz                        // GitHub OAuth client id
 CLIENT_SECRET=xyz                    // GitHub OAuth client secret
-TOKEN_EXPIRE=1d                      // JWT Expire time span
-JWT_SECRET=xyz                       // random 32 char string
+TOKEN_EXPIRE=1d                      // JWT expire time span
+JWT_SECRET=xyz                       // Random 32 char string
  ```
 
 - In `/frontend/` add `.env.development` and `.env.production` files
@@ -22,7 +22,7 @@ JWT_SECRET=xyz                       // random 32 char string
 Example for .env.development
 
 ```env
-VITE_API_BASE_URL=http://localhost:3333   // Frontend Base URL (CORS origin)
+VITE_API_BASE_URL=http://localhost:3333   // Axios base url to express server
  ```
 
 - Use `npm run dev` or `npm run prod` to start the API
