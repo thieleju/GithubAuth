@@ -59,7 +59,7 @@ export const useMainStore = defineStore("mainStore", {
       try {
         this.setJWT(jwtToken);
 
-        // get user info with jwt token(auth to middleware) and github token(auth to github)
+        // get user info with jwt(auth to middleware) and github token(auth to github)
         const ghUser = await axios.post(this.getBaseUrl + "/users/user", {
           access_token: ghToken,
         });
