@@ -1,4 +1,4 @@
-# Vue 3 + Typescript + Vite and express api
+# Vue 3 + Typescript + Vite and Express Middleware
 
 ## How to use
 
@@ -9,12 +9,12 @@
 Example for .env.development
 
  ```env
-SERVER_PORT=3333
-CORS_ORIGIN=http://localhost:3000
-CLIENT_ID=xyz            // GitHub OAuth client id
-CLIENT_SECRET=xyz        // GitHub OAuth client secret
-TOKEN_EXPIRE=1d
-JWT_SECRET=xyz           // random 32 char string
+SERVER_PORT=3333                     // Express Server Port
+CORS_ORIGIN=http://localhost:3000    // Only allow requests from this origin
+CLIENT_ID=xyz                        // GitHub OAuth client id
+CLIENT_SECRET=xyz                    // GitHub OAuth client secret
+TOKEN_EXPIRE=1d                      // JWT Expire time span
+JWT_SECRET=xyz                       // random 32 char string
  ```
 
 - In `/frontend/` add `.env.development` and `.env.production` files
@@ -22,13 +22,13 @@ JWT_SECRET=xyz           // random 32 char string
 Example for .env.development
 
 ```env
-VITE_API_BASE_URL=http://localhost:3333
+VITE_API_BASE_URL=http://localhost:3333   // Frontend Base URL (CORS origin)
  ```
 
 - Use `npm run dev` or `npm run prod` to start the API
 
 - Use `npm run dev` to start the frontend
 
-## Recommended IDE Setup
+## Recommended IDE 
 
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+- [VSCode](https://code.visualstudio.com/)
