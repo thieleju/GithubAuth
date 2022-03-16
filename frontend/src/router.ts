@@ -51,15 +51,20 @@ const router = createRouter({
   ],
 });
 
+// this is an async function without try catch, but only autologin will fail, which is ok
+router.beforeEach(async (to, from, next) => {
+  const mainStore = useMainStore()
+  // do auto login
+  const jwtToken = localStorage.getItem("jwt.token")
+  const ghToken = localStorage.getItem("gh.token")
+  if (!mainStore.isAuthenticated && jwtToken && ghToken) {
+    await mainStore.login(jwtToken, ghToken)
+  }
 
-router.beforeEach((to, from, next) => {
   // if meta.requiresAuth is true, check if the user is authenticated
   // only next() if the user is authenticated, otherwise redirect to start
-
-  const authUserStore = useMainStore()
-
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (authUserStore.isUserAuthenticated) next()
+    if (mainStore.isUserAuthenticated) next()
     else next({ name: "start" })
   } else next()
 })

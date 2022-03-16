@@ -1,6 +1,4 @@
 import { defineStore } from "pinia";
-// import { useRouter } from "vue-router";
-
 import { GitHubUser } from "./GitHubUser";
 import axios from "../plugins/axios";
 
@@ -36,6 +34,7 @@ export const useMainStore = defineStore("mainStore", {
       this.jwt = jwt;
     },
     setGitHubToken(githubToken: string): void {
+      localStorage.setItem("gh.token", githubToken);
       this.githubToken = githubToken;
       this.isAuthenticated = true;
     },
@@ -44,6 +43,7 @@ export const useMainStore = defineStore("mainStore", {
     },
     logout(): void {
       localStorage.removeItem("jwt.token");
+      localStorage.removeItem("gh.token");
       this.isAuthenticated = false
       this.jwt = "";
       this.githubToken = "";
@@ -54,6 +54,25 @@ export const useMainStore = defineStore("mainStore", {
     },
     setApps(apps: AppItem[]): void {
       this.apps = apps;
+    },
+    async login(jwtToken: string, ghToken: string): Promise<void> {
+      try {
+        this.setJWT(jwtToken);
+
+        // get user info with jwt token(auth to middleware) and github token(auth to github)
+        const ghUser = await axios.post(this.getBaseUrl + "/users/user", {
+          access_token: ghToken,
+        });
+
+        // get new apps for user
+        const apps = await axios.get(this.getBaseUrl + "/users/apps");
+
+        this.setApps(apps.data.apps);
+        this.setUser(ghUser.data.user);
+        this.setGitHubToken(ghToken);
+      } catch (error) {
+        console.log(error)
+      }
     }
   },
   getters: {

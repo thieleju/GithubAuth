@@ -15,6 +15,7 @@ const mainStore = useMainStore();
 const router = useRouter();
 
 onMounted(() => {
+  console.log(mainStore.isUserAuthenticated);
   if (mainStore.isUserAuthenticated) {
     router.push({ name: "home" });
   }

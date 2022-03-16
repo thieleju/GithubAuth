@@ -21,18 +21,8 @@ onMounted(async () => {
       access_token: route.query.access_token,
     });
 
-    // get user info with jwt token(auth to middleware) and github token(auth to github)
-    const userRes = await axios.post(mainStore.getBaseUrl + "/users/user", {
-      access_token: tokenRes.data.tokenGitHub,
-    });
-
-    // get new apps for user
-    const apps = await axios.get(mainStore.getBaseUrl + "/users/apps");
-
-    mainStore.setApps(apps.data.apps);
-    mainStore.setUser(userRes.data.user);
-    mainStore.setJWT(tokenRes.data.tokenJwt);
-    mainStore.setGitHubToken(tokenRes.data.tokenGitHub);
+    // do login
+    await mainStore.login(tokenRes.data.tokenJwt, tokenRes.data.tokenGitHub);
 
     // redirect to home component
     router.push({ name: "home" });
