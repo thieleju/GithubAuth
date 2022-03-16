@@ -50,8 +50,10 @@ app.get("/", (req, res) => {
 // import routes
 import authRouter from "./routes/auth";
 import usersRouter from "./routes/users";
+import publicRouter from "./routes/public";
 app.use("/auth", authRouter);
 app.use("/users", usersRouter);
+app.use("/public", publicRouter);
 
 // Create server object
 const server = app.listen(port, () => {

@@ -2,6 +2,13 @@ import { defineStore } from "pinia";
 // import { useRouter } from "vue-router";
 
 import { GitHubUser } from "./GitHubUser";
+import axios from "../plugins/axios";
+
+export type AppItem = {
+  title: string;
+  name: string;
+  icon: string;
+}
 
 export type RootState = {
   jwt: string;
@@ -9,6 +16,7 @@ export type RootState = {
   isAuthenticated: boolean,
   ghUser: GitHubUser | null;
   baseUrl: string;
+  apps: AppItem[];
 };
 
 export const useMainStore = defineStore("mainStore", {
@@ -18,7 +26,8 @@ export const useMainStore = defineStore("mainStore", {
       githubToken: "",
       isAuthenticated: false,
       ghUser: null,
-      baseUrl: ""
+      baseUrl: "",
+      apps: [],
     } as RootState;
   },
   actions: {
@@ -42,6 +51,9 @@ export const useMainStore = defineStore("mainStore", {
     },
     setBaseUrl(baseUrl: string): void {
       this.baseUrl = baseUrl;
+    },
+    setApps(apps: AppItem[]): void {
+      this.apps = apps;
     }
   },
   getters: {
@@ -59,6 +71,9 @@ export const useMainStore = defineStore("mainStore", {
     },
     getBaseUrl(): string {
       return this.baseUrl;
+    },
+    getApps(): AppItem[] {
+      return this.apps;
     }
   }
 });
