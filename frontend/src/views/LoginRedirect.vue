@@ -13,12 +13,11 @@ import { useMainStore } from "../store/index";
 const route = useRoute();
 const router = useRouter();
 const mainStore = useMainStore();
-const baseUrl: string = String(import.meta.env.VITE_API_BASE_URL);
 
 onMounted(async () => {
   try {
     // get jwt with query token from github
-    const tokenRes = await axios.post(baseUrl + "/auth/token", {
+    const tokenRes = await axios.post(mainStore.getBaseUrl + "/auth/token", {
       access_token: route.query.access_token,
     });
 
@@ -27,7 +26,7 @@ onMounted(async () => {
     mainStore.setGitHubToken(tokenRes.data.tokenGitHub);
 
     // get user info with jwt token(auth to middleware) and github token(auth to github)
-    const userRes = await axios.post(baseUrl + "/users/user", {
+    const userRes = await axios.post(mainStore.getBaseUrl + "/users/user", {
       access_token: mainStore.getGitHubToken,
     });
 

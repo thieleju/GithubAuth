@@ -21,12 +21,11 @@ import { useMainStore } from "../store/index";
 
 const mainStore = useMainStore();
 
-let baseUrl: string = String(import.meta.env.VITE_API_BASE_URL);
 let data = ref();
 let userData = ref(mainStore.getUser);
 
 function fetchData() {
-  axios.get(baseUrl).then((res) => {
+  axios.get(mainStore.getBaseUrl).then((res) => {
     data.value = res.data;
   });
 }

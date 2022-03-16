@@ -14,8 +14,6 @@ import { useRouter } from "vue-router";
 const mainStore = useMainStore();
 const router = useRouter();
 
-let baseUrl: string = String(import.meta.env.VITE_API_BASE_URL);
-
 onMounted(() => {
   if (mainStore.isUserAuthenticated) {
     router.push({ name: "home" });
@@ -23,7 +21,7 @@ onMounted(() => {
 });
 
 function loginGithub() {
-  window.location.href = baseUrl + "/auth/login";
+  window.location.href = mainStore.getBaseUrl + "/auth/login";
 }
 </script>
 

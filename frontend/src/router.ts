@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { useMainStore } from './store/index';
 
+const DEFAULT_TITLE: string = "Default Title"
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -8,24 +10,34 @@ const router = createRouter({
       path: "/",
       name: "start",
       component: () => import("./views/Start.vue"),
+      meta: {
+        title: "Start"
+      }
     },
     {
       path: "/home",
       name: "home",
       component: () => import("./views/Home.vue"),
       meta: {
-        requiresAuth: true
+        requiresAuth: true,
+        title: "Home"
       }
     },
     {
       path: "/about",
       name: "about",
       component: () => import("./views/About.vue"),
+      meta: {
+        title: "About"
+      }
     },
     {
       path: "/cb",
       name: "cb",
       component: () => import("./views/LoginRedirect.vue"),
+      meta: {
+        title: "Redirecting ..."
+      }
     },
   ],
 });
@@ -41,6 +53,12 @@ router.beforeEach((to, from, next) => {
     if (authUserStore.isUserAuthenticated) next()
     else next({ name: "start" })
   } else next()
+})
+
+
+router.afterEach((to, from) => {
+  // set the page title
+  document.title = String(to.meta.title || DEFAULT_TITLE)
 })
 
 export default router;
